@@ -10,7 +10,7 @@ ns leiningen.sepal-repl
       [] pprint
       , :rename $ {} (pprint fipp)
 
-defn- eval-lines (project lines)
+defn- eval-lines (lines)
   if (> (count lines) 0)
     let
         quoted-code $ transform-x (first lines)
@@ -18,14 +18,14 @@ defn- eval-lines (project lines)
           str "|    -> "
             with-out-str $ pp/write quoted-code
         result $ try
-          eval/eval-in-project project quoted-code
+          eval quoted-code
           catch Exception e
             println e
       print $ blue "|    <- "
       fipp result
-      recur project (rest lines)
+      recur (rest lines)
 
-defn- eval-print (project)
+defn- eval-print ()
   print $ blue "|sepal> "
   flush
   let
@@ -33,12 +33,12 @@ defn- eval-print (project)
       details $ pare code
     if (:failed details)
       println details
-      eval-lines project (:value details)
-    recur project
+      eval-lines (:value details)
+    recur
 
 -- "|reusing code from https://github.com/Cirru/sepal-repl.clj"
 
 defn sepal-repl (project & args)
   println "|Starting REPL for Sepal.clj ..."
   flush
-  eval-print project
+  eval-print

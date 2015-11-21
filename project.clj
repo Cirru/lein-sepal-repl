@@ -1,4 +1,4 @@
-(defproject cirru/lein-sepal-repl "0.0.1"
+(defproject cirru/lein-sepal-repl "0.0.2"
   :description "lein plugin for Sepal.clj REPL"
   :url "http://github.com/Cirru/lein-sepal-repl"
   :license {:name "Eclipse Public License"

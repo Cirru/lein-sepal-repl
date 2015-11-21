@@ -6,6 +6,8 @@ Based on https://github.com/Cirru/sepal-repl.clj
 
 ## Usage
 
+[![Clojars Project](http://clojars.org/cirru/lein-sepal-repl/latest-version.svg)](http://clojars.org/cirru/lein-sepal-repl)
+
 ```clojure
 :plugins [lein-sepal-repl "0.0.1"]
 ```
