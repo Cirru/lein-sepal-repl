@@ -12,30 +12,36 @@ ns leiningen.sepal-repl
       , :rename $ {} (pprint fipp)
     [] cemerick.pomegranate :as pomegranate
 
-defn- eval-lines (lines)
-  if (> (count lines) 0)
-    let
-        quoted-code $ transform-x (first lines)
-        _ $ println $ magenta
-          str "|    -> "
-            with-out-str $ pp/write quoted-code
-        result $ try
-          eval quoted-code
-          catch Exception e
-            println e
-      print $ blue "|    <- "
-      fipp result
-      recur (rest lines)
+def open-paren "|("
+
+defn- eval-code (quoted-code)
+  let
+      _ $ println $ magenta
+        str "|    -> "
+          with-out-str $ pp/write quoted-code
+      result $ try
+        eval quoted-code
+        catch Exception e
+          println e
+    print $ blue "|    <- "
+    fipp result
 
 defn- eval-print ()
   print $ blue "|sepal> "
   flush
   let
       code $ read-line
-      details $ pare code
-    if (:failed details)
-      println details
-      eval-lines (:value details)
+    if (= code nil)
+      do
+        println "|\nbye for now~"
+        System/exit 0
+      if (= (subs code 0 1) open-paren)
+        eval-code $ read-string code
+        let
+            details $ pare code
+          if (:failed details)
+            println details
+            eval-code $ transform-x $ get (:value details) 0
     recur
 
 -- "|reusing code from https://github.com/Cirru/sepal-repl.clj"
