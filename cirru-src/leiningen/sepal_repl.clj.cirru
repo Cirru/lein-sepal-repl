@@ -2,6 +2,7 @@
 ns leiningen.sepal-repl
   :require
     [] leiningen.core.eval :as eval
+    [] leiningen.core.classpath :as cp
     [] cirru.sepal :refer $ [] transform-x
     [] cirru.parser-combinator :refer $ [] pare
     [] clojure.term.colors :refer :all
@@ -9,6 +10,7 @@ ns leiningen.sepal-repl
     [] fipp.edn :refer
       [] pprint
       , :rename $ {} (pprint fipp)
+    [] cemerick.pomegranate :as pomegranate
 
 defn- eval-lines (lines)
   if (> (count lines) 0)
@@ -41,4 +43,7 @@ defn- eval-print ()
 defn sepal-repl (project & args)
   println "|Starting REPL for Sepal.clj ..."
   flush
+  doseq
+    [] path $ cp/get-classpath project
+    pomegranate/add-classpath path
   eval-print
