@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :eval-in-leiningen true
-  :dependencies [[cirru/sepal "0.0.6"]
+  :dependencies [[cirru/sepal "0.0.9"]
                  [cirru/parser-combinator "0.0.1"]
                  [clojure-term-colors "0.1.0-SNAPSHOT"]
                  [fipp "0.6.3"]
