@@ -9,7 +9,13 @@ Based on https://github.com/Cirru/sepal-repl.clj
 [![Clojars Project](http://clojars.org/cirru/lein-sepal-repl/latest-version.svg)](http://clojars.org/cirru/lein-sepal-repl)
 
 ```clojure
-:plugins [lein-sepal-repl "0.0.4"]
+:plugins [[cirru/lein-sepal-repl "0.0.7"]]
+```
+
+Or just the version:
+
+```clojure
+[cirru/lein-sepal-repl "0.0.7"]
 ```
 
 and start REPL with:
